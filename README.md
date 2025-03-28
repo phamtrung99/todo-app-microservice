@@ -5,25 +5,18 @@ Simple go microservice todo-app using [go-micro library](https://github.com/micr
 ## Structure
 
 ```bash
-toto-app-microservice/
-│── api-gateway/         # HTTP Gateway sử dụng Go-Micro
+todo-app-microservice/
+│── api-gateway/         # HTTP Gateway using Go-Micro
 │   ├── go.mod
-│   ├── main.go          # Khởi tạo HTTP server
-│   ├── handler.go       # Xử lý HTTP request
-│   ├── client.go        # Kết nối đến gRPC services
-│── todo/                # gRPC Service 1
+│   ├── main.go          # Initializes the HTTP server
+│   ├── handler.go       # Handles HTTP requests
+│   ├── client.go        # Connects to gRPC services
+│── todo/                # gRPC services
 │   ├── go.mod
 │   ├── main.go
 │   ├── proto/
-│── task/                # gRPC Service 2
-│   ├── go.mod
-│   ├── main.go
-│   ├── proto/│       ├── task.proto   # Định nghĩa gRPC message và service
-│       └── task.pb.go   # File được generate từ task.proto
-│── proto/               # Chứa các file .proto
-│   ├── todo.proto       # Định nghĩa gRPC message và service
-│   └── todo.pb.go       # File được generate từ todo.proto
-
+│       ├── todo.pb.proto     # Defines gRPC messages and service
+│       └── todo.pb.micro.go   # File generated from todo.proto
 
 ```
 
