@@ -28,7 +28,7 @@ func main() {
 }
 
 type TodoService struct {
-	todos map[string]*pb.Todo
+	todos map[string]*pb.Todo // TODO: need db to storage this
 }
 
 func (s *TodoService) CreateTodo(ctx context.Context, req *pb.CreateTodoRequest, rsp *pb.CreateTodoResponse) error {
@@ -37,7 +37,9 @@ func (s *TodoService) CreateTodo(ctx context.Context, req *pb.CreateTodoRequest,
 		Id:          id,
 		Title:       req.Title,
 		Description: req.Description,
-	} // Correctly access fields from req
+	}
+	logger.Infof("Created todo with ID: %s", id)
+
 	rsp.Id = id
 	return nil
 }
@@ -46,5 +48,8 @@ func (s *TodoService) GetTodos(ctx context.Context, req *pb.GetTodosRequest, rsp
 	for _, todo := range s.todos {
 		rsp.Todos = append(rsp.Todos, todo)
 	}
+
+	logger.Infof("Get all todo")
+
 	return nil
 }
