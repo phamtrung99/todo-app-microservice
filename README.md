@@ -4,20 +4,29 @@ Simple go microservice todo-app using [go-micro library](https://github.com/micr
 
 ## Structure
 
-```bash
-todo-app-microservice/
-│── api-gateway/         # HTTP Gateway using Go-Micro
-│   ├── go.mod
-│   ├── main.go          # Initializes the HTTP server
-│   ├── handler.go       # Handles HTTP requests
-│   ├── client.go        # Connects to gRPC services
-│── todo/                # gRPC services
-│   ├── go.mod
-│   ├── main.go
-│   ├── proto/
-│       ├── todo.pb.proto     # Defines gRPC messages and service
-│       └── todo.pb.micro.go   # File generated from todo.proto
-
+```
+└── todo-app-microservice
+    └── api-gateway
+        └── client
+            └── client.go
+        └── Dockerfile
+        └── go.mod
+        └── go.sum
+        └── handler
+            └── handler.go
+        └── main.go
+    └── auth
+    └── todo
+        └── Dockerfile
+        └── go.mod
+        └── go.sum
+        └── main.go
+        └── proto
+            └── todo.pb.go
+            └── todo.pb.micro.go
+            └── todo.proto
+    └── docker-compose.yml
+    └── README.md
 ```
 
 
