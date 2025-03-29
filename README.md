@@ -37,12 +37,6 @@ Simple go microservice todo-app using [go-micro library](https://github.com/micr
 docker compose up --build
 ```
 
-1. Gen protoc
-
-``` bash
-protoc --proto_path=./proto --micro_out=./proto --go_out=./proto todo.proto
-```
-
 3. Test by curl
 
 Create Todo
@@ -56,7 +50,6 @@ Get Todos
 ``` bash
 curl -X GET "http://localhost:3000/todos"
 ```
-
 
 
 

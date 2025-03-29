@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	pb "github.com/phamtrung99/todo-app-microservice/todo/proto"
+	"github.com/phamtrung99/todo-app-microservice/todo/utils"
 	"go-micro.dev/v5"
 	"go-micro.dev/v5/logger"
 )
@@ -18,6 +19,9 @@ func main() {
 		todos: make(map[string]*pb.Todo),
 	}
 	pb.RegisterTodoServiceHandler(service.Server(), todoService)
+
+	utils.GetMysqlClient()
+	utils.Migrate()
 
 	if err := service.Run(); err != nil {
 		logger.Fatal(err)

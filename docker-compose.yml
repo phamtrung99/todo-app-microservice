@@ -5,6 +5,7 @@ services:
     build:
       context: ./api-gateway
       dockerfile: Dockerfile
+    command: ["/app/api-gateway"]
     depends_on:
       - todo-service
     ports:
@@ -18,7 +19,23 @@ services:
     build:
       context: ./todo
       dockerfile: Dockerfile
-    command: ["/home/todo/todo"]
+    depends_on:
+      - db
+    command: ["/app/todo"]
+    networks:
+      - local
+
+  db:
+    image: mysql:8.0-oracle
+    environment:
+      command: --default-authentication-plugin=mysql_native_password
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: todo
+    volumes:
+      - ./todo/mount/mysql-data:/var/lib/mysql
+      - ./todo/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+    ports:
+      - "3306:3306"
     networks:
       - local
 

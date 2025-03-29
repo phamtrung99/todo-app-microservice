@@ -1,7 +1,7 @@
 ARG GOLANG_TAG=1.24.1-alpine
 FROM golang:${GOLANG_TAG}
 
-WORKDIR /home/todo
+WORKDIR /app
 
 ENV PATH="$PATH:$(go env GOPATH)/bin"
 

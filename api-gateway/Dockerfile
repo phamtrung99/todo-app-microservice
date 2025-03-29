@@ -1,7 +1,7 @@
 ARG GOLANG_TAG=1.24.1-alpine
 FROM golang:${GOLANG_TAG}
-WORKDIR /home/api-gateway
+WORKDIR /app
 
 COPY . .
 
-CMD ["go","run","main.go"]
+RUN GOOS=linux GOARCH=arm64 go build -o api-gateway .
