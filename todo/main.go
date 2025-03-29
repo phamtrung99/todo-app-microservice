@@ -10,10 +10,7 @@ import (
 )
 
 func main() {
-	service := micro.NewService(
-		micro.Name("todo.service"),
-		micro.Version("5.3.0"),
-	)
+	service := micro.NewService(micro.Name("todo.service"))
 
 	service.Init()
 
