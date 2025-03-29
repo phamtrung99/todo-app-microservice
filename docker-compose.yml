@@ -1,0 +1,27 @@
+services:
+  api-gateway:
+    image: api-gateway
+    pull_policy: never
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    depends_on:
+      - todo-service
+    ports:
+      - "3000:3000"
+    networks:
+      - local
+
+  todo-service:
+    image: todo-service
+    pull_policy: never
+    build:
+      context: ./todo
+      dockerfile: Dockerfile
+    command: ["/home/todo/todo"]
+    networks:
+      - local
+
+networks:
+  local:
+    driver: bridge
