@@ -14,7 +14,6 @@ RUN set -x \
            protobuf-dev \
            git \
            build-base \
-    && go get github.com/micro/go-micro/cmd/protoc-gen-micro \
     && go install github.com/micro/go-micro/cmd/protoc-gen-micro \
     && go install google.golang.org/protobuf/cmd/protoc-gen-go@latest \
     && go mod tidy
