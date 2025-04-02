@@ -2,42 +2,26 @@
 
 Simple go microservice todo-app using [go-micro library](https://github.com/micro/go-micro)
 
-## Structure
-
-```
-└── todo-app-microservice
-    └── api-gateway
-        └── client
-            └── client.go
-        └── Dockerfile
-        └── go.mod
-        └── go.sum
-        └── handler
-            └── handler.go
-        └── main.go
-    └── auth
-    └── todo
-        └── Dockerfile
-        └── go.mod
-        └── go.sum
-        └── main.go
-        └── proto
-            └── todo.pb.go
-            └── todo.pb.micro.go
-            └── todo.proto
-    └── docker-compose.yml
-    └── README.md
-```
-
 
 ## Start
-### I. Run by docker compose: 
+### I. Local run:
+**Prequisite:**  
 
+[protoc-gen-micro](https://github.com/micro/go-micro/tree/master/cmd/protoc-gen-micro#install)  
+[protoc](https://protobuf.dev/installation/)
+
+
+**Gen proto file**
+```
+protoc --proto_path=./proto --micro_out=./proto --go_out=./proto todo.proto
+```
+
+**Start**
 ```
 docker compose up --build
 ```
 
-3. Test by curl
+**Test by curl**
 
 Create Todo
 ``` bash
@@ -51,6 +35,7 @@ Get Todos
 curl -X GET "http://localhost:3000/todos"
 ```
 
-
+### Reference
+[Gen migrate file](./todo/database/Readme.md)
 
 
