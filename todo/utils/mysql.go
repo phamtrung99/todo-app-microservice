@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"os"
+
 	gormMysql "gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
@@ -22,25 +24,27 @@ func GetMysqlClient() *gorm.DB {
 	return db
 }
 
-func Migrate() {
+func Migrate() error {
 	db, err := sql.Open("mysql", "root:1234@(db:3306)/todo?multiStatements=true")
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	driver, err := migrateMysql.WithInstance(db, &migrateMysql.Config{})
 	if err != nil {
-		panic(err)
+		return err
 	}
 
-	m, err := migrate.NewWithDatabaseInstance(
-		"file://./database/",
+	wd, _ := os.Getwd()
+	path := "file://" + wd + "/database/"
+
+	m, _ := migrate.NewWithDatabaseInstance(
+		path,
 		"mysql",
 		driver,
 	)
-	if err != nil {
-		panic(err)
-	}
 
-	m.Steps(2)
+	m.Up()
+
+	return nil
 }
