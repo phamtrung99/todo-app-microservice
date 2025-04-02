@@ -1,0 +1,12 @@
+ARG GOLANG_TAG=1.24.1-alpine
+FROM golang:${GOLANG_TAG}
+
+WORKDIR /app
+
+COPY . .
+
+RUN go mod download
+RUN go install -v github.com/air-verse/air@v1.61.7
+
+# go build
+CMD ["air"]

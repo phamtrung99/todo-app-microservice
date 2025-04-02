@@ -4,8 +4,9 @@ services:
     pull_policy: never
     build:
       context: ./api-gateway
-      dockerfile: Dockerfile
-    command: ["/app/api-gateway"]
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./api-gateway:/app
     depends_on:
       - todo-service
     ports:
@@ -18,10 +19,11 @@ services:
     pull_policy: never
     build:
       context: ./todo
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     depends_on:
       - db
-    command: ["/app/todo"]
+    volumes:
+      - ./todo:/app
     networks:
       - local
 
