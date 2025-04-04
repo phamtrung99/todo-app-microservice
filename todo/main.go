@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/phamtrung99/todo-app-microservice/todo/config"
 	pb "github.com/phamtrung99/todo-app-microservice/todo/proto"
 	tdService "github.com/phamtrung99/todo-app-microservice/todo/service"
 	"github.com/phamtrung99/todo-app-microservice/todo/utils"
@@ -10,14 +11,23 @@ import (
 )
 
 func main() {
-	service := micro.NewService(micro.Name("todo.service"))
+	// Load config
+	err := config.LoadConfig()
+	if err != nil {
+		panic(err)
+	}
+	cfg := config.Get()
+
+	// Init service
+	service := micro.NewService(micro.Name(cfg.ServiceName))
 
 	service.Server().Init(
 		server.Wait(nil), // graceful shutdown
 	)
 
-	dbClient := utils.GetMysqlClient()
-	err := utils.Migrate()
+	// Init DB connect
+	dbClient := utils.GetMysqlClient(cfg)
+	err = utils.Migrate(cfg)
 	if err != nil {
 		panic(err)
 	}

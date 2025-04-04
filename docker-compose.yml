@@ -13,6 +13,8 @@ services:
       - "3000:3000"
     networks:
       - local
+    env_file:
+      - ./api-gateway/config/.env.dev
 
   todo-service:
     image: todo-service
@@ -26,6 +28,8 @@ services:
       - ./todo:/app
     networks:
       - local
+    env_file:
+      - ./todo/config/.env.dev
 
   db:
     image: mysql:8.0-oracle

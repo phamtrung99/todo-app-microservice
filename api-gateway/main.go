@@ -5,14 +5,22 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/phamtrung99/todo-app-microservice/api-gateway/client"
+	"github.com/phamtrung99/todo-app-microservice/api-gateway/config"
 	"github.com/phamtrung99/todo-app-microservice/api-gateway/handler"
 	"go-micro.dev/v5"
 	"go-micro.dev/v5/logger"
 )
 
 func main() {
+	// Load config
+	err := config.LoadConfig()
+	if err != nil {
+		panic(err)
+	}
+	cfg := config.Get()
+
 	// Initialize Go-Micro Service
-	service := micro.NewService(micro.Name("api.gateway"))
+	service := micro.NewService(micro.Name(cfg.ServiceName))
 	service.Init()
 
 	// Create gRPC Client

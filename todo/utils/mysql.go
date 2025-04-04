@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"os"
 
 	gormMysql "gorm.io/driver/mysql"
@@ -12,10 +13,12 @@ import (
 	"github.com/golang-migrate/migrate/v4"
 	migrateMysql "github.com/golang-migrate/migrate/v4/database/mysql"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
+	"github.com/phamtrung99/todo-app-microservice/todo/config"
 )
 
-func GetMysqlClient() *gorm.DB {
-	dsn := "root:1234@(db:3306)/todo?charset=utf8mb4&parseTime=True&loc=Local"
+func GetMysqlClient(cfg *config.Config) *gorm.DB {
+	dsn := fmt.Sprintf("%s:%s@(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+		cfg.Mysql.User, cfg.Mysql.Password, cfg.Mysql.Host, cfg.Mysql.Port, cfg.Mysql.Database)
 	db, err := gorm.Open(gormMysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
@@ -24,8 +27,10 @@ func GetMysqlClient() *gorm.DB {
 	return db
 }
 
-func Migrate() error {
-	db, err := sql.Open("mysql", "root:1234@(db:3306)/todo?multiStatements=true")
+func Migrate(cfg *config.Config) error {
+	dsn := fmt.Sprintf("%s:%s@(%s:%s)/%s?multiStatements=true",
+		cfg.Mysql.User, cfg.Mysql.Password, cfg.Mysql.Host, cfg.Mysql.Port, cfg.Mysql.Database)
+	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		return err
 	}
