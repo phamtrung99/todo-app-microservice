@@ -1,0 +1,7 @@
+Do not change this todo.proto file, please fetch from server.
+Step 1: Sync file todo.proto from todo server
+Step 2: Gen code
+
+```
+protoc --proto_path=./proto --micro_out=./proto --go_out=./proto todo.proto
+```

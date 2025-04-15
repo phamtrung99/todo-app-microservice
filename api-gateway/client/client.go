@@ -3,7 +3,7 @@ package client
 import (
 	"context"
 
-	pbTodo "github.com/phamtrung99/todo-app-microservice/todo/proto"
+	pbTodo "github.com/phamtrung99/todo-app-microservice/api-gateway/proto"
 	"go-micro.dev/v5/client"
 	"go-micro.dev/v5/logger"
 )
@@ -20,6 +20,8 @@ type todoClient struct {
 func NewTodoClient(service client.Client) ITodoClient {
 	return &todoClient{
 		client: pbTodo.NewTodoService("todo.service", service),
+		// NOTE: "todo.service" is name of server acts like DNS name;
+		// incase difference network, need connect to use server host and port client.WithAddress("my.remote-server.com:50051")
 	}
 }
 

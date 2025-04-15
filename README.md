@@ -11,10 +11,12 @@ Simple go microservice todo-app using [go-micro library](https://github.com/micr
 [protoc](https://protobuf.dev/installation/)
 
 
-**Gen proto file**
+**Gen proto file**  
+File .proto was be clone from todo service to api-gateway or any client, after that generate from .proto interface to client code (JS, Go, etc...)
 ```
 protoc --proto_path=./proto --micro_out=./proto --go_out=./proto todo.proto
 ```
+
 
 **Start**
 ```

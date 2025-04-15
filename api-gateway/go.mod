@@ -4,8 +4,9 @@ go 1.24.1
 
 require (
 	github.com/gorilla/mux v1.8.1
-	github.com/phamtrung99/todo-app-microservice/todo v0.0.0-20250327095018-5e865051376c
+	github.com/kelseyhightower/envconfig v1.4.0
 	go-micro.dev/v5 v5.3.0
+	google.golang.org/protobuf v1.36.6
 )
 
 require (
@@ -15,11 +16,12 @@ require (
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/imdario/mergo v0.3.12 // indirect
-	github.com/kelseyhightower/envconfig v1.4.0 // indirect
+	github.com/kr/text v0.2.0 // indirect
 	github.com/miekg/dns v1.1.43 // indirect
 	github.com/oxtoacart/bpool v0.0.0-20190530202638-03653db5a59c // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible // indirect
 	github.com/pkg/errors v0.9.1 // indirect
+	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/urfave/cli/v2 v2.25.7 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
@@ -27,5 +29,4 @@ require (
 	golang.org/x/sync v0.12.0 // indirect
 	golang.org/x/sys v0.31.0 // indirect
 	golang.org/x/text v0.23.0 // indirect
-	google.golang.org/protobuf v1.36.6 // indirect
 )
