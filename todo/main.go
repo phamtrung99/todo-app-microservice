@@ -4,7 +4,7 @@ import (
 	"github.com/phamtrung99/todo-app-microservice/todo/config"
 	pb "github.com/phamtrung99/todo-app-microservice/todo/proto"
 	tdService "github.com/phamtrung99/todo-app-microservice/todo/service"
-	"github.com/phamtrung99/todo-app-microservice/todo/utils"
+	"github.com/phamtrung99/todo-app-microservice/commonpkg"
 	"go-micro.dev/v5"
 	"go-micro.dev/v5/logger"
 	"go-micro.dev/v5/server"
@@ -19,15 +19,18 @@ func main() {
 	cfg := config.Get()
 
 	// Init service
-	service := micro.NewService(micro.Name(cfg.ServiceName))
+	service := micro.NewService(
+		micro.Name(cfg.ServiceName),
+		micro.Address(":50051"),
+	)
 
 	service.Server().Init(
 		server.Wait(nil), // graceful shutdown
 	)
 
 	// Init DB connect
-	dbClient := utils.GetMysqlClient(cfg)
-	err = utils.Migrate(cfg)
+	dbClient := commonpkg.GetMysqlClient(cfg.Mysql.User)
+	err = commonpkg.Migrate(cfg)
 	if err != nil {
 		panic(err)
 	}
