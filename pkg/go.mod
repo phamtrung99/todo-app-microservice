@@ -1,4 +1,4 @@
-module github.com/phamtrung99/todo-app-microservice/commonpkg
+module github.com/phamtrung99/todo-app-microservice/pkg
 
 go 1.22.6
 
