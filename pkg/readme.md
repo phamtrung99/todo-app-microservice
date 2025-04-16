@@ -1,1 +1,1 @@
-Common go package using for this project
+Common go package like database connection and migrate, kafka connection.
